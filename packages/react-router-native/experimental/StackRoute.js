@@ -35,7 +35,7 @@ class StackContainer extends Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.pushToStack("down");
   }
 
@@ -76,7 +76,7 @@ const PARENT_TRAVEL_DISTANCE = 100;
 const PARENT_FINAL_OPACITY = 0.25;
 const CARD_SHADOW_RADIUS = 10;
 
-class AnimatedStack extends React.PureComponent {
+class AnimatedStack extends React.Component {
   static propTypes = {
     title: PropTypes.any,
     content: PropTypes.any,
@@ -435,7 +435,7 @@ class StackRootContainer extends Component {
 }
 
 class RedirectStack extends Component {
-  componentDidMount() {
+  componentWillMount() {
     delete rootStoredLocations[this.props.path];
   }
 
