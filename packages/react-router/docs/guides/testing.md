@@ -99,9 +99,7 @@ const App = () => (
     />
   </div>
 );
-```
 
-```jsx
 // you can also use a renderer like "@testing-library/react" or "enzyme/mount" here
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from 'react-dom/test-utils';
@@ -142,15 +140,15 @@ You shouldn't have to access the `location` or `history` objects very often in t
 ```jsx
 // app.test.js
 test("clicking filter links updates product query params", () => {
-  let history, location;
+  let testHistory, testLocation;
   render(
     <MemoryRouter initialEntries={["/my/initial/route"]}>
       <App />
       <Route
         path="*"
         render={({ history, location }) => {
-          history = history;
-          location = location;
+          testHistory = history;
+          testLocation = location;
           return null;
         }}
       />
@@ -163,8 +161,8 @@ test("clicking filter links updates product query params", () => {
   });
 
   // assert about url
-  expect(location.pathname).toBe("/products");
-  const searchParams = new URLSearchParams(location.search);
+  expect(testLocation.pathname).toBe("/products");
+  const searchParams = new URLSearchParams(testLocation.search);
   expect(searchParams.has("id")).toBe(true);
   expect(searchParams.get("id")).toEqual("1234");
 });
